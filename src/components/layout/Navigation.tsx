@@ -2,13 +2,18 @@
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useSmartNavigation } from '@/hooks/useSmartNavigation';
 
 const DEFAULT_NAVIGATION = {
+  logoUrl: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=120&h=40&fit=crop&q=80',
+  logoAlt: 'Company Logo',
   brandName: 'TestFlow',
   brandHref: '#hero',
+  showLogo: true,
+  showBrandName: true,
   navItems: [{ label: 'Home', href: '#hero' }],
   ctaText: 'Get Started',
   ctaHref: '#hero',
@@ -43,12 +48,22 @@ export default function Navigation(props: NavigationProps) {
           <div className="flex-shrink-0">
             <Button
               variant="ghost"
-              className="text-xl font-bold text-foreground hover:text-primary p-0 h-auto"
+              className="flex items-center gap-3 text-xl font-bold text-foreground hover:text-primary p-2 h-auto"
               onClick={handleBrandClick}
               data-editable-href="brandHref"
               data-href={config.brandHref}
             >
-              <span data-editable="brandName">{config.brandName}</span>
+              {config.showLogo && (
+                <Image
+                  src={config.logoUrl}
+                  alt={config.logoAlt}
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 object-contain"
+                  data-editable-src="logoUrl"
+                />
+              )}
+              {config.showBrandName && <span data-editable="brandName">{config.brandName}</span>}
             </Button>
           </div>
 
@@ -103,12 +118,24 @@ export default function Navigation(props: NavigationProps) {
                   <div className="pb-4 border-b border-border">
                     <Button
                       variant="ghost"
-                      className="text-xl font-bold text-foreground hover:text-primary p-0 h-auto"
+                      className="flex items-center gap-3 text-xl font-bold text-foreground hover:text-primary p-0 h-auto"
                       onClick={handleBrandClick}
                       data-editable-href="brandHref"
                       data-href={config.brandHref}
                     >
-                      <span data-editable="brandName">{config.brandName}</span>
+                      {config.showLogo && (
+                        <Image
+                          src={config.logoUrl}
+                          alt={config.logoAlt}
+                          width={32}
+                          height={32}
+                          className="w-8 h-8 object-contain"
+                          data-editable-src="logoUrl"
+                        />
+                      )}
+                      {config.showBrandName && (
+                        <span data-editable="brandName">{config.brandName}</span>
+                      )}
                     </Button>
                   </div>
 
